@@ -36,7 +36,7 @@ typedef struct {
 //Função para iniciar a fila
 void inicializarFila(Fila *fila){
     fila->frente = 0;
-    fila->tras = 0;
+    fila->tras = -1;
     fila->tamanho = 0;
 }
 
@@ -75,7 +75,6 @@ Peca gerarPeca(int id){
 }
 
 //Função enqueue
-
 void enqueue(Fila *fila, Peca nova){
     if(filaCheia(fila)){
         printf("\nA fila está cheia!\n");
@@ -151,19 +150,40 @@ void mostrarEstado(Fila *fila, Pilha *pilha) {
     }
 }
 
+//Troca de peças
+void trocarTopo(Fila *fila, Pilha *pilha){
+    if (filaVazia(fila) || pilhaVazia(pilha)){
+        printf("\nNão foi possível fazer a troca");
+        return;
+    }
+
+    int indicefrente = fila->frente;
+    Peca temp = fila->elementos[indicefrente];
+    fila->elementos[indicefrente] = pilha->elementos[pilha->topo];
+    pilha->elementos[pilha->topo] = temp;
+    printf("\Troca realizada entre frente da fila e topo da pilha!\n");
+
+}
+
+void trocarBloco(Fila *fila, Pilha *pilha){
+    if (fila->tamanho < 3 || pilha->topo < 2){
+        printf("\nImpossível realizar a troca! É necessário ao menos 2 peças em cada.\n");
+        return;
+
+    }
+    for (int i = 0; i < 3; i ++){
+        int indice = (fila->frente +i) %MAX_FILA;
+        Peca temp = fila->elementos[indice];
+        fila->elementos[indice] = pilha->elementos[pilha->topo - i];
+        pilha->elementos[pilha->topo -i] = temp;
+    }
+    printf("\Troca múltipla realizada entre as 3 primeiras da fila e as 3 da pilha!\n");
+
+}
+
 int main() {
 
-    // 🧠 Nível Aventureiro: Adição da Pilha de Reserva
-    //
-    // - Implemente uma pilha linear com capacidade para 3 peças.
-    // - Crie funções como inicializarPilha(), push(), pop(), pilhaCheia(), pilhaVazia().
-    // - Permita enviar uma peça da fila para a pilha (reserva).
-    // - Crie um menu com opção:
-    //      2 - Enviar peça da fila para a reserva (pilha)
-    //      3 - Usar peça da reserva (remover do topo da pilha)
-    // - Exiba a pilha junto com a fila após cada ação com mostrarPilha().
-    // - Mantenha a fila sempre com 5 peças (repondo com gerarPeca()).
-
+    
     Fila fila;
     Pilha pilha;
     inicializarFila(&fila);
@@ -182,6 +202,8 @@ int main() {
         printf("1. Jogar peça\n");
         printf("2. Reservar peça\n");
         printf("3. Usar peça reserva\n");
+        printf("4. Trocar peça da frente com o topo da pilha\n");
+        printf("5. Trocar as 3 primeiras da fila com as 3 da pilha\n");
         printf("0. Sair\n");
         printf("Escolha uma das opções: ");
         scanf("%d",&opcao);
@@ -222,10 +244,21 @@ int main() {
             break;
         }
 
+        case 4 :
+            trocarTopo(&fila, &pilha);
+
+            break;
+
+        case 5 :
+            trocarBloco(&fila, &pilha);
+
+            break;
+
         case 0 :
             printf("\nSaindo...\n");
 
             break;
+            
         default:
             printf("\nOpção inválida!");
         }
