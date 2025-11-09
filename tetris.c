@@ -183,7 +183,24 @@ void trocarBloco(Fila *fila, Pilha *pilha){
 
 int main() {
 
-    
+    // 🔄 Nível Mestre: Integração Estratégica entre Fila e Pilha
+    //
+    // - Implemente interações avançadas entre as estruturas:
+    //      4 - Trocar a peça da frente da fila com o topo da pilha
+    //      5 - Trocar os 3 primeiros da fila com as 3 peças da pilha
+    // - Para a opção 4:
+    //      Verifique se a fila não está vazia e a pilha tem ao menos 1 peça.
+    //      Troque os elementos diretamente nos arrays.
+    // - Para a opção 5:
+    //      Verifique se a pilha tem exatamente 3 peças e a fila ao menos 3.
+    //      Use a lógica de índice circular para acessar os primeiros da fila.
+    // - Sempre valide as condições antes da troca e informe mensagens claras ao usuário.
+    // - Use funções auxiliares, se quiser, para modularizar a lógica de troca.
+    // - O menu deve ficar assim:
+    //      4 - Trocar peça da frente com topo da pilha
+    //      5 - Trocar 3 primeiros da fila com os 3 da pilha
+
+
     Fila fila;
     Pilha pilha;
     inicializarFila(&fila);
@@ -258,30 +275,12 @@ int main() {
             printf("\nSaindo...\n");
 
             break;
-            
+
         default:
             printf("\nOpção inválida!");
         }
     }
     while (opcao != 0);
-
-
-    // 🔄 Nível Mestre: Integração Estratégica entre Fila e Pilha
-    //
-    // - Implemente interações avançadas entre as estruturas:
-    //      4 - Trocar a peça da frente da fila com o topo da pilha
-    //      5 - Trocar os 3 primeiros da fila com as 3 peças da pilha
-    // - Para a opção 4:
-    //      Verifique se a fila não está vazia e a pilha tem ao menos 1 peça.
-    //      Troque os elementos diretamente nos arrays.
-    // - Para a opção 5:
-    //      Verifique se a pilha tem exatamente 3 peças e a fila ao menos 3.
-    //      Use a lógica de índice circular para acessar os primeiros da fila.
-    // - Sempre valide as condições antes da troca e informe mensagens claras ao usuário.
-    // - Use funções auxiliares, se quiser, para modularizar a lógica de troca.
-    // - O menu deve ficar assim:
-    //      4 - Trocar peça da frente com topo da pilha
-    //      5 - Trocar 3 primeiros da fila com os 3 da pilha
 
 
     return 0;
